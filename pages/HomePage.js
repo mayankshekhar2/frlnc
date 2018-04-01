@@ -66,6 +66,11 @@ var pageElements = {
         navigateToBlogNineButton : {
         	selector : ".//a[@href='/blog/page9/']",
             locateStrategy : 'xpath'
+        },
+
+        errorLink : {
+        	selector : ".//a[@class='error-link']",
+            locateStrategy : 'xpath'
         }
 };
 var homePage = {
@@ -221,6 +226,10 @@ var homePage = {
 
     validatePage8 : function(browser){
         this.waitForElementVisible('@navigateToBlogNineButton',this.timeout)
+    },
+
+    validateErrorPage : function(browser) {
+        this.waitForElementVisible('@errorLink',this.timeout);
     }
 };
 

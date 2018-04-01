@@ -1,0 +1,12 @@
+node_modules
+Thumbs.db
+.DS_Store
+*.log
+build
+.project
+custom/db/test.db
+vim.exe.stackdump
+.sonar
+sonar-project.properties
+allure-results
+reports/TestdataWrapper.xml

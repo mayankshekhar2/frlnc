@@ -1,0 +1,87 @@
+{
+	"src_folders": ["tests"],
+	"output_folder": "reports",
+	"page_objects_path": "pages",
+	"globals_path": "custom/Globals.js",
+	"end_session_on_fail": false,
+	"test_workers": {
+		"enabled": true,
+		"workers": "1"
+	},
+
+	"custom_commands_path" : "",
+    "custom_assertions_path" : "",
+
+	"selenium": {
+		"start_process": false,
+		"server_path": "lib/jars/selenium-server-standalone-2.53.0.jar",
+		"log_path": "",
+		"host": "localhost",
+		"port": 4444,
+		"cli_args": {
+			"webdriver.chrome.driver": "",
+			"webdriver.ie.driver": ""
+		}
+	},
+
+	"test_settings": {
+		"default": {
+		    "launch_url": "https://vuejsdevelopers.com/",
+			"selenium_host": "localhost",
+			"selenium_port": 4444,
+			"silent": true,
+			"screenshots": {
+				"enabled": true,
+				"on_failure": true,
+				"on_error": true,
+				"path": "./reports/screenshots/fail"
+			},
+			"globals": {
+				"credentials": {}				
+			},
+			"desiredCapabilities": {
+				"browserName": "chrome",
+				"javascriptEnabled": true,
+				"acceptSslCerts": true,
+				"chromeOptions": {
+					"args": ["disable-extensions"]
+				}
+			}
+		},
+
+		"stg": {
+			"launch_url": "https://vuejsdevelopers.com/",
+			"selenium_host": "localhost",
+			"selenium_port": 4444,
+			"silent": true,
+			"screenshots": {
+				"enabled": true,
+				"on_failure": true,
+				"on_error": true,
+				"path": "./reports/screenshots/fail"
+			},
+			"globals": {
+				"credentials": {}
+				}
+			},
+			"desiredCapabilities": {
+				"browserName": "chrome",
+				"javascriptEnabled": true,
+				"acceptSslCerts": true,
+				"chromeOptions": {
+					"args": ["disable-extensions"]
+				}
+			}
+		},		
+
+	"chrome": {
+		"desiredCapabilities": {
+			"browserName": "chrome",
+			"javascriptEnabled": true,
+			"acceptSslCerts": true,
+			"chromeOptions": {
+				"args": ["disable-extensions"]
+			}
+		}
+	}
+}

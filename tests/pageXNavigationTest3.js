@@ -8,30 +8,20 @@ var homePage;
 
 module.exports = {
 
-    'Launch the URL' : function (browser) {
+    'Launch the URL to page 8' : function (browser) {
         browser.useXpath();            
         homePage = browser.page.HomePage();
-        browser.url(browser.launch_url);        
+        var url = browser.launch_url+"blog/page8/"
+        browser.url(url);
+        console.log("URL ="+url);        
     },
 
     'Close Pop Up' : function (browser) {
         homePage.closePopUp(browser);
     },
-
-    'Print the Social Counter Cookie' : function (browser) {
-        homePage.printSocialCounter(browser);
-    },
     
-    'Assert Fb Count' : function (browser) {
-        homePage.validateFbCount(browser);
-    },
-
-    'Assert Twitter Count' : function (browser) {
-        homePage.validateTwtrCount(browser);
-    },
-
-    'Assert Google Plus Count' : function (browser) {
-        homePage.validatePlusCount(browser);
+    'Validate that the page is page 8' : function (browser) {
+        homePage.validatePage8(browser);
     },
 
     before : function () {

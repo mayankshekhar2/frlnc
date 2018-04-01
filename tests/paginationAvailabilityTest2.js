@@ -11,27 +11,20 @@ module.exports = {
     'Launch the URL' : function (browser) {
         browser.useXpath();            
         homePage = browser.page.HomePage();
-        browser.url(browser.launch_url);        
+        browser.url(browser.launch_url);
+        console.log("URL ="+launch_url);        
     },
 
     'Close Pop Up' : function (browser) {
         homePage.closePopUp(browser);
     },
 
-    'Print the Social Counter Cookie' : function (browser) {
-        homePage.printSocialCounter(browser);
+    'Validate that Navigation Button is present and click it' : function (browser) {
+        homePage.validateNavigationToPage2(browser);
     },
     
-    'Assert Fb Count' : function (browser) {
-        homePage.validateFbCount(browser);
-    },
-
-    'Assert Twitter Count' : function (browser) {
-        homePage.validateTwtrCount(browser);
-    },
-
-    'Assert Google Plus Count' : function (browser) {
-        homePage.validatePlusCount(browser);
+    'Validate that new page is page 2' : function (browser) {
+        homePage.validatePage2(browser);
     },
 
     before : function () {

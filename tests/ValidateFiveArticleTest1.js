@@ -18,20 +18,12 @@ module.exports = {
         homePage.closePopUp(browser);
     },
 
-    'Print the Social Counter Cookie' : function (browser) {
-        homePage.printSocialCounter(browser);
+    'Validate that 5 Articles are displayed' : function (browser) {
+        homePage.validateFiveArticles(browser);
     },
     
-    'Assert Fb Count' : function (browser) {
-        homePage.validateFbCount(browser);
-    },
-
-    'Assert Twitter Count' : function (browser) {
-        homePage.validateTwtrCount(browser);
-    },
-
-    'Assert Google Plus Count' : function (browser) {
-        homePage.validatePlusCount(browser);
+    'Validate that Posts are in descending order by date' : function (browser) {
+        homePage.validateFirstArticleIsLaterThanSecondArticle(browser);
     },
 
     before : function () {

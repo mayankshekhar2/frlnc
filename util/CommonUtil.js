@@ -11,5 +11,24 @@ module.exports = {
             .assert.value(index,true);
         });
         
+    },
+
+    getJSONObj : function (cookie){
+        var nSt1 = cookie.replace(/%22/g,'"');
+        var nSt2 = nSt1.replace(/%2C/g,',');
+        var nSt3 = nSt2.replace(/ /g,'');
+        // console.log(nSt3);
+        var jsonObj = JSON.parse(nSt3);
+        return jsonObj;
+    },
+
+    getBlogPositioninJSON : function (urlUI,cookieJSON){
+        var len = cookieJSON.length;
+        for(var i=0;i<len;i++){
+            if(urlUI == cookieJSON[i].url){
+                return i;
+            }
+        }
+        return -1;
     }
 };

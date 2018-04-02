@@ -22,7 +22,7 @@ module.exports = {
     },
 
     before : function () {
-    	log.logInfo('Start of Social Counter Test');
+    	log.logInfo('Start of Page X Navigation Negative Scenario 2 Test');
         return this;
     },
 
@@ -31,7 +31,7 @@ module.exports = {
 
         } finally {
             browser.end();
-            log.logInfo('End of Social Counter Test');
+            log.logInfo('End of Page X Navigation Negative Scenario 2 Test');
         }
     }
 };

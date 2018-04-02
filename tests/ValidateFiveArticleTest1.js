@@ -27,7 +27,7 @@ module.exports = {
     },
 
     before : function () {
-    	log.logInfo('Start of Social Counter Test');
+    	log.logInfo('Start of Validate Five Articles Test');
         return this;
     },
 
@@ -36,7 +36,7 @@ module.exports = {
 
         } finally {
             browser.end();
-            log.logInfo('End of Social Counter Test');
+            log.logInfo('End of Validate Five Articles Test');
         }
     }
 };

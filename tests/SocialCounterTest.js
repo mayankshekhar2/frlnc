@@ -17,21 +17,25 @@ module.exports = {
     'Close Pop Up' : function (browser) {
         homePage.closePopUp(browser);
     },
-
-    'Print the Social Counter Cookie' : function (browser) {
-        homePage.printSocialCounter(browser);
-    },
     
-    'Assert Fb Count' : function (browser) {
-        homePage.validateFbCount(browser);
+    'Validate Counts for Article 1' : function (browser) {
+        homePage.ValidateCountsForArticle1(browser);
     },
 
-    'Assert Twitter Count' : function (browser) {
-        homePage.validateTwtrCount(browser);
+    'Validate Counts for Article 2' : function (browser) {
+        homePage.ValidateCountsForArticle2(browser);
     },
 
-    'Assert Google Plus Count' : function (browser) {
-        homePage.validatePlusCount(browser);
+    'Validate Counts for Article 3' : function (browser) {
+        homePage.ValidateCountsForArticle3(browser);
+    },
+
+    'Validate Counts for Article 4' : function (browser) {
+        homePage.ValidateCountsForArticle4(browser);
+    },
+
+    'Validate Counts for Article 5' : function (browser) {
+        homePage.ValidateCountsForArticle5(browser);
     },
 
     before : function () {

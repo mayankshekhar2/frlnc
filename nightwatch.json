@@ -31,9 +31,9 @@
 			"selenium_port": 4444,
 			"silent": true,
 			"screenshots": {
-				"enabled": true,
-				"on_failure": true,
-				"on_error": true,
+				"enabled": false,
+				"on_failure": false,
+				"on_error": false,
 				"path": "./reports/screenshots/fail"
 			},
 			"globals": {
@@ -55,9 +55,9 @@
 			"selenium_port": 4444,
 			"silent": true,
 			"screenshots": {
-				"enabled": true,
-				"on_failure": true,
-				"on_error": true,
+				"enabled": false,
+				"on_failure": false,
+				"on_error": false,
 				"path": "./reports/screenshots/fail"
 			},
 			"globals": {

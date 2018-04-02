@@ -1,6 +1,7 @@
 var testDataProvider = require('../data/TestDataProvider.js');
 var log = require('../custom/log/logger.js');
 var chai = require('../node_modules/chai/chai.js')
+var utils = require('../util/CommonUtil.js')
 // var JSON = require('../node_modules/json/lib/json.js')
 
 var pageElements = {
@@ -13,6 +14,81 @@ var pageElements = {
             selector : ".//span[@class='counter c_facebook'][contains(@data-url,'/vue-cli-3/')]",
             locateStrategy : 'xpath'
         },
+
+        article1FacebookButton : {
+            selector : ".//article[@class='post'][1]/descendant::span[@class='counter c_facebook']",
+            locateStrategy : 'xpath'
+        },
+        
+        article2FacebookButton : {
+            selector : ".//article[@class='post'][2]/descendant::span[@class='counter c_facebook']",
+            locateStrategy : 'xpath'
+        },
+        
+        article3FacebookButton : {
+            selector : ".//article[@class='post'][3]/descendant::span[@class='counter c_facebook']",
+            locateStrategy : 'xpath'
+        },
+        
+        article4FacebookButton : {
+            selector : ".//article[@class='post'][4]/descendant::span[@class='counter c_facebook']",
+            locateStrategy : 'xpath'
+        },
+        
+        article5FacebookButton : {
+            selector : ".//article[@class='post'][5]/descendant::span[@class='counter c_facebook']",
+            locateStrategy : 'xpath'
+        },
+        
+        article1TwitterButton : {
+            selector : ".//article[@class='post'][1]/descendant::span[@class='counter c_twitter']",
+            locateStrategy : 'xpath'
+        },
+        
+        article2TwitterButton : {
+            selector : ".//article[@class='post'][2]/descendant::span[@class='counter c_twitter']",
+            locateStrategy : 'xpath'
+        },
+        
+        article3TwitterButton : {
+            selector : ".//article[@class='post'][3]/descendant::span[@class='counter c_twitter']",
+            locateStrategy : 'xpath'
+        },
+        
+        article4TwitterButton : {
+            selector : ".//article[@class='post'][4]/descendant::span[@class='counter c_twitter']",
+            locateStrategy : 'xpath'
+        },
+        
+        article5TwitterButton : {
+            selector : ".//article[@class='post'][5]/descendant::span[@class='counter c_twitter']",
+            locateStrategy : 'xpath'
+        },
+        
+        article1GooglePlusButton : {
+            selector : ".//article[@class='post'][1]/descendant::span[@class='counter c_plus']",
+            locateStrategy : 'xpath'
+        },
+        
+        article2GooglePlusButton : {
+            selector : ".//article[@class='post'][2]/descendant::span[@class='counter c_plus']",
+            locateStrategy : 'xpath'
+        },
+        
+        article3GooglePlusButton : {
+            selector : ".//article[@class='post'][3]/descendant::span[@class='counter c_plus']",
+            locateStrategy : 'xpath'
+        },
+        
+        article4GooglePlusButton : {
+            selector : ".//article[@class='post'][4]/descendant::span[@class='counter c_plus']",
+            locateStrategy : 'xpath'
+        },
+        
+        article5GooglePlusButton : {
+            selector : ".//article[@class='post'][5]/descendant::span[@class='counter c_plus']",
+            locateStrategy : 'xpath'
+        },        
 
         googlePlusButton : {
         	selector : ".//span[@class='counter c_plus'][contains(@data-url,'/vue-cli-3/')]",
@@ -84,86 +160,154 @@ var homePage = {
         .click('@popUpButton');
     },
 
-    printSocialCounter : function(browser){
-        browser.pause(2000)
-        .getCookie('socialCounter',function(result){
-            var nSt1 = result.value.toString().replace(/%22/g,' ');
-            var nSt2 = nSt1.replace(/%2C/g,',');
-            var nSt3 = nSt2.replace(/ /g,'');
-            var nSt4 = nSt3.replace('[','{');
-            var nSt = nSt2.replace(']','}');
-            console.log(nSt);
-            var json = JSON.parse(nSt);
-            console.log("socialCounter cookie= "+json.url);
-        });
+    ValidateCountsForArticle1 : function (browser){
+        var sel1 = pageElements.article1FacebookButton.selector;
+        this.validateFbCount(browser,sel1);
+
+        var sel2 = pageElements.article1TwitterButton.selector;
+        this.validateTwitterCount(browser,sel2);
+
+        var sel3 = pageElements.article1GooglePlusButton.selector;
+        this.validatePlusCount(browser,sel3);
     },
 
-    validateFbCount : function (browser) {
+    ValidateCountsForArticle2 : function (browser){
+        var sel1 = pageElements.article2FacebookButton.selector;
+        this.validateFbCount(browser,sel1);
+
+        var sel2 = pageElements.article2TwitterButton.selector;
+        this.validateTwitterCount(browser,sel2);
+
+        var sel3 = pageElements.article2GooglePlusButton.selector;
+        this.validatePlusCount(browser,sel3);
+    },
+
+    ValidateCountsForArticle3 : function (browser){
+        var sel1 = pageElements.article3FacebookButton.selector;
+        this.validateFbCount(browser,sel1);
+
+        var sel2 = pageElements.article3TwitterButton.selector;
+        this.validateTwitterCount(browser,sel2);
+
+        var sel3 = pageElements.article3GooglePlusButton.selector;
+        this.validatePlusCount(browser,sel3);
+    },
+
+    ValidateCountsForArticle4 : function (browser){
+        var sel1 = pageElements.article4FacebookButton.selector;
+        this.validateFbCount(browser,sel1);
+
+        var sel2 = pageElements.article4TwitterButton.selector;
+        this.validateTwitterCount(browser,sel2);
+
+        var sel3 = pageElements.article4GooglePlusButton.selector;
+        this.validatePlusCount(browser,sel3);
+    },
+
+    ValidateCountsForArticle5 : function (browser){
+        var sel1 = pageElements.article5FacebookButton.selector;
+        this.validateFbCount(browser,sel1);
+
+        var sel2 = pageElements.article5TwitterButton.selector;
+        this.validateTwitterCount(browser,sel2);
+
+        var sel3 = pageElements.article5GooglePlusButton.selector;
+        this.validatePlusCount(browser,sel3);
+    },
+
+    validateFbCount : function (browser,sel) {
         
-        var fb;
+        var pos;
+        var UIcount;
+        var CookieCount;
+        var url;
+        var cookieJSON;
 
         browser.useXpath()
         .pause(2000)
-        
-        this.waitForElementVisible('@facebookButton', this.timeout);
-        this.getText('@facebookButton',function(result){
-            console.log("Facebook Count="+result.value);
-            fb = "%22facebook%22:"+result.value;
+
+        this.getAttribute(sel,'data-url',function(result){
+            url = result.value.toString();
+            console.log("data-url of Article= "+url);
         });
+        
+        this.waitForElementVisible(sel, this.timeout);
+        this.getText(sel,function(result){
+            console.log("Facebook UI Count="+result.value);
+            UIcount = result.value;
+        });        
 
         browser.pause(2000)
         .getCookie('socialCounter',function(result){
-            var found = result.value.indexOf(fb);
-            var final = "Fail";
-            if(found >= 0)
-                final = "Pass";
-            chai.assert.equal(final,"Pass","Fb Count does not match with cookie");
+            cookieJSON = utils.getJSONObj(result.value.toString());
+            pos = utils.getBlogPositioninJSON(url,cookieJSON);
+            CookieCount = cookieJSON[pos].facebook;
+            console.log("Facebook cookie Count="+CookieCount);
+            chai.assert.equal(CookieCount,UIcount,"Fb Count does not match with cookie");
         });
     },
 
-    validateTwtrCount : function (browser) {
+    validateTwitterCount : function (browser,sel) {
         
-        var twt;
+        var pos;
+        var UIcount;
+        var CookieCount;
+        var url;
+        var cookieJSON;
 
         browser.useXpath()
         .pause(2000)
-        
-        this.waitForElementVisible('@twitterButton', this.timeout);
-        this.getText('@twitterButton',function(result){
-            console.log("Twitter Count="+result.value);
-            twt = "%22twitter%22:"+result.value;
+
+        this.getAttribute(sel,'data-url',function(result){
+            url = result.value.toString();
+            console.log("data-url of Article = "+url);
         });
+        
+        this.waitForElementVisible(sel, this.timeout);
+        this.getText(sel,function(result){
+            console.log("Twitter UI Count="+result.value);
+            UIcount = result.value;
+        });        
 
         browser.pause(2000)
         .getCookie('socialCounter',function(result){
-            var found = result.value.indexOf(twt);
-            var final = "Fail";
-            if(found >= 0)
-                final = "Pass";
-            chai.assert.equal(final,"Pass","Twitter Count does not match with cookie");
+            cookieJSON = utils.getJSONObj(result.value.toString());
+            pos = utils.getBlogPositioninJSON(url,cookieJSON);
+            CookieCount = cookieJSON[pos].twitter;
+            console.log("Twitter cookie Count="+CookieCount);
+            chai.assert.equal(CookieCount,UIcount,"Twitter Count does not match with cookie");
         });
     },
 
-    validatePlusCount : function (browser) {
+    validatePlusCount : function (browser,sel) {
         
-        var plus;
+        var pos;
+        var UIcount;
+        var CookieCount;
+        var url;
+        var cookieJSON;
 
         browser.useXpath()
         .pause(2000)
-        
-        this.waitForElementVisible('@googlePlusButton', this.timeout);
-        this.getText('@googlePlusButton',function(result){
-            console.log("Plus Count="+result.value);
-            plus = "%22plus%22:"+result.value;
+
+        this.getAttribute(sel,'data-url',function(result){
+            url = result.value.toString();
+            console.log("data-url of Article = "+url);
         });
+        
+        this.waitForElementVisible(sel, this.timeout);
+        this.getText(sel,function(result){
+            console.log("Google Plus UI Count="+result.value);
+            UIcount = result.value;
+        });        
 
         browser.pause(2000)
         .getCookie('socialCounter',function(result){
-            var found = result.value.indexOf(plus);
-            var final = "Fail";
-            if(found >= 0)
-                final = "Pass";
-            chai.assert.equal(final,"Pass","Google Plus Count does not match with cookie");
+            cookieJSON = utils.getJSONObj(result.value.toString());
+            pos = utils.getBlogPositioninJSON(url,cookieJSON);
+            CookieCount = cookieJSON[pos].plus;
+            console.log("Google Plus cookie Count="+CookieCount);
+            chai.assert.equal(CookieCount,UIcount,"Google Plus Count does not match with cookie");
         });
     },
 

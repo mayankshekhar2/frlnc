@@ -5,9 +5,9 @@
 
 var bunyan = require('bunyan');
 var logObj = bunyan.createLogger({
-    name : 'EcommQAAutomationTestSummary',
+    name : 'VuJSTestSummary',
     streams : [{
-        path : './reports/ecommqasummary.log'
+        path : './reports/VuJSTestSummary.log'
         // `type: 'file'` is implied
     }]
 });

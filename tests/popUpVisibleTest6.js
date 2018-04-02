@@ -11,24 +11,21 @@ module.exports = {
     'Launch the URL' : function (browser) {
         browser.useXpath();            
         homePage = browser.page.HomePage();
-        browser.url(browser.launch_url);
-        console.log("URL ="+browser.launch_url);      
+        var url = browser.launch_url+"blog/page3/"
+        browser.url(url);
+        console.log("URL ="+url);      
+    },
+
+    'Verify Pop is visible' : function (browser) {
+        homePage.verifyPopUpVisible(browser);
     },
 
     'Close Pop Up' : function (browser) {
         homePage.closePopUp(browser);
     },
 
-    'Validate that Navigation Button is present and click it' : function (browser) {
-        homePage.validateNavigationToPage2(browser);
-    },
-    
-    'Validate that new page is page 2' : function (browser) {
-        homePage.validatePage2(browser);
-    },
-
     before : function () {
-    	log.logInfo('Start of Pagination Availability Test');
+    	log.logInfo('Start of Pop Up Visibility Test');
         return this;
     },
 
@@ -37,7 +34,7 @@ module.exports = {
 
         } finally {
             browser.end();
-            log.logInfo('End of Pagination Availability Test');
+            log.logInfo('End of Pop Up Visibility Test');
         }
     }
 };

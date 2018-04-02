@@ -148,9 +148,28 @@ var pageElements = {
         errorLink : {
         	selector : ".//a[@class='error-link']",
             locateStrategy : 'xpath'
+        },
+
+        searchBox : {
+        	selector : ".//input[@id='search-query']",
+            locateStrategy : 'xpath'
         }
 };
 var homePage = {
+
+    validatesearchBoxVisible : function(browser){
+        browser.useXpath()
+        .pause(2000);
+
+        this.waitForElementVisible('@searchBox',this.timeout);
+    },
+
+    verifyPopUpVisible : function(browser){
+        browser.useXpath()
+        .pause(2000);
+
+        this.waitForElementVisible('@popUpButton', this.timeout)
+    },
 
     closePopUp : function(browser){
         browser.useXpath()

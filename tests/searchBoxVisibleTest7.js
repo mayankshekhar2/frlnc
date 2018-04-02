@@ -11,24 +11,21 @@ module.exports = {
     'Launch the URL' : function (browser) {
         browser.useXpath();            
         homePage = browser.page.HomePage();
-        browser.url(browser.launch_url);
-        console.log("URL ="+browser.launch_url);      
+        var url = browser.launch_url+"blog/page5/"
+        browser.url(url);
+        console.log("URL ="+url);        
     },
 
     'Close Pop Up' : function (browser) {
         homePage.closePopUp(browser);
     },
-
-    'Validate that Navigation Button is present and click it' : function (browser) {
-        homePage.validateNavigationToPage2(browser);
-    },
     
-    'Validate that new page is page 2' : function (browser) {
-        homePage.validatePage2(browser);
+    'Validate that search box is visible' : function (browser) {
+        homePage.validatesearchBoxVisible(browser);
     },
 
     before : function () {
-    	log.logInfo('Start of Pagination Availability Test');
+    	log.logInfo('Start of Search Box Visible Test');
         return this;
     },
 
@@ -37,7 +34,7 @@ module.exports = {
 
         } finally {
             browser.end();
-            log.logInfo('End of Pagination Availability Test');
+            log.logInfo('End of Search Box Visible Test');
         }
     }
 };

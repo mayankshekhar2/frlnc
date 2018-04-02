@@ -1,6 +1,7 @@
 var testDataProvider = require('../data/TestDataProvider.js');
 var log = require('../custom/log/logger.js');
 var chai = require('../node_modules/chai/chai.js')
+// var JSON = require('../node_modules/json/lib/json.js')
 
 var pageElements = {
         twitterButton : {
@@ -86,7 +87,14 @@ var homePage = {
     printSocialCounter : function(browser){
         browser.pause(2000)
         .getCookie('socialCounter',function(result){
-            console.log("socialCounter cookie= "+result.value);
+            var nSt1 = result.value.toString().replace(/%22/g,' ');
+            var nSt2 = nSt1.replace(/%2C/g,',');
+            var nSt3 = nSt2.replace(/ /g,'');
+            var nSt4 = nSt3.replace('[','{');
+            var nSt = nSt2.replace(']','}');
+            console.log(nSt);
+            var json = JSON.parse(nSt);
+            console.log("socialCounter cookie= "+json.url);
         });
     },
 

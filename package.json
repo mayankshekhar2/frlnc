@@ -15,6 +15,7 @@
     "comment-parser": "",
     "faker": "",
     "find": "",
+    "json": "^9.0.6",
     "junit-viewer": "",
     "lodash": "",
     "minimist": "",

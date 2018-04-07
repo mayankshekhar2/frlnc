@@ -22,8 +22,12 @@ Note:
 
 
 ## To Run
-* nightwatch tests\
-* nightwatch test\<testName>.js
+
+```sh
+npm run test # all tests
+nightwatch tests\<testName>.js # specific test
+```
+
 
 ##Logs
 
@@ -32,12 +36,8 @@ Note:
 ##Reports
 
 * Reports will be in Junit XML format
-* Use junit-viewer module to view the report
-```sh
-npm install -g junit-viewer
-```
-* Reports will be in Junit XML format
-```sh
-junit-viewer -results=reports -save=reports\rep.html -minify=false
+
+```bash
+npm run report
 ```
 

@@ -1,7 +1,7 @@
 {
-  "name": "ValidateSocialCounters",
+  "name": "vjd-blog-e2e-tests",
   "version": "1.0.0",
-  "description": "",
+  "description": "Vue.js Developers Blog E2E Tests",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -24,9 +24,12 @@
     "sqlite3": "",
     "ya-csv": ""
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "junit-viewer": "^4.11.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nightwatch tests",
+    "report": "junit-viewer --results=reports --save=reports/rep.html --minify=false && open reports/rep.html"
   },
   "repository": {},
   "keywords": [],

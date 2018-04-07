@@ -44,7 +44,7 @@
 				"javascriptEnabled": true,
 				"acceptSslCerts": true,
 				"chromeOptions": {
-					"args": ["disable-extensions"]
+					"args": ["disable-extensions","headless","disable-gpu","no-sandbox","allow-insecure-localhost"]
 				}
 			}
 		},
@@ -62,25 +62,14 @@
 			},
 			"globals": {
 				"credentials": {}
-				}
 			},
 			"desiredCapabilities": {
 				"browserName": "chrome",
 				"javascriptEnabled": true,
 				"acceptSslCerts": true,
 				"chromeOptions": {
-					"args": ["disable-extensions"]
+					"args": ["disable-extensions","headless","disable-gpu","no-sandbox","allow-insecure-localhost"]
 				}
-			}
-		},		
-
-	"chrome": {
-		"desiredCapabilities": {
-			"browserName": "chrome",
-			"javascriptEnabled": true,
-			"acceptSslCerts": true,
-			"chromeOptions": {
-				"args": ["disable-extensions"]
 			}
 		}
 	}

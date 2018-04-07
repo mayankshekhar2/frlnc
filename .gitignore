@@ -10,3 +10,8 @@ vim.exe.stackdump
 sonar-project.properties
 allure-results
 reports/TestdataWrapper.xml
+reports/*.html
+.idea
+allure-report/*
+allure-result/*
+*.xml

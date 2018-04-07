@@ -30,5 +30,11 @@ module.exports = {
             }
         }
         return -1;
+    },
+
+    removeHeadlessBrowser : function (browser){
+        var a=browser.options.desiredCapabilities.chromeOptions;
+        browser.options.desiredCapabilities.chromeOptions.args = ['disable-extensions']
+        console.log(a.args);
     }
 };

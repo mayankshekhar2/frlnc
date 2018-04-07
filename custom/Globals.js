@@ -1,6 +1,7 @@
 var log = require('../custom/log/logger.js');
 var logSummary = require('../custom/log/summary.js');
 var args = require('minimist')(process.argv);
+var allure = require("nightwatch-allure-adapter");
 
 var totalTestsPassed = 0;
 var totalTestsFailed = 0;
@@ -15,7 +16,7 @@ var timestamp = String(new Date());
 
 module.exports = {
     
-                   
+    reporter: allure.write,               
     waitForConditionPollInterval : 300,
     waitForConditionTimeout: 90000,
     detailed_output: false,

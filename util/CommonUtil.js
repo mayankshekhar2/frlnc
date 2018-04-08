@@ -37,4 +37,4 @@ module.exports = {
         browser.options.desiredCapabilities.chromeOptions.args = ['disable-extensions']
         console.log(a.args);
     }
-};
+}

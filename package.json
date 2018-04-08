@@ -21,6 +21,7 @@
     "minimist": "",
     "nightwatch": "^0.9.20",
     "nightwatch-allure-adapter": "",
+    "npm": "^5.8.0",
     "sqlite3": "",
     "ya-csv": ""
   },
@@ -29,7 +30,8 @@
   },
   "scripts": {
     "test": "nightwatch tests",
-    "report": "junit-viewer --results=reports --save=reports/rep.html --minify=false && open reports/rep.html"
+    "report": "junit-viewer --results=reports --save=reports/rep.html --minify=false && open reports/rep.html",
+    "allure": "allure generate --clean & start ./allure-report/index.html"
   },
   "repository": {},
   "keywords": [],

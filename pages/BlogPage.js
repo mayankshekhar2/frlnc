@@ -116,6 +116,11 @@ var pageElements = {
             locateStrategy : 'xpath'
         },
 
+        navigateToBlogOnrButton : {
+        	selector : ".//a[@href='/']",
+            locateStrategy : 'xpath'
+        },
+
         navigateToBlogTwoButton : {
         	selector : ".//a[@href='/blog/page2/']",
             locateStrategy : 'xpath'
@@ -126,8 +131,33 @@ var pageElements = {
             locateStrategy : 'xpath'
         },
 
+        navigateToBlogFourButton : {
+        	selector : ".//a[@href='/blog/page4/']",
+            locateStrategy : 'xpath'
+        },
+
+        navigateToBlogFiveButton : {
+        	selector : ".//a[@href='/blog/page5/']",
+            locateStrategy : 'xpath'
+        },
+
+        navigateToBlogSevenButton : {
+        	selector : ".//a[@href='/blog/page7/']",
+            locateStrategy : 'xpath'
+        },
+
         navigateToBlogNineButton : {
         	selector : ".//a[@href='/blog/page9/']",
+            locateStrategy : 'xpath'
+        },
+
+        navigateToBlogTenButton : {
+        	selector : ".//a[@href='/blog/page10/']",
+            locateStrategy : 'xpath'
+        },
+
+        navigateToBlogTwelveButton : {
+        	selector : ".//a[@href='/blog/page12/']",
             locateStrategy : 'xpath'
         },
 
@@ -163,6 +193,11 @@ var pageElements = {
         
         article5Comments : {
             selector : ".//article[@class='post'][5]/descendant::span[@class='disqus-comment-count']",
+            locateStrategy : 'xpath'
+        },
+
+        metaOGUrl : {
+            selector : ".//meta[@property='og:url']",
             locateStrategy : 'xpath'
         }
 };
@@ -439,16 +474,55 @@ var blogPage = {
         .click('@navigateToBlogTwoButton');
     },
 
+    validateNavigationToPage4 : function (browser) {
+        this.waitForElementVisible('@navigateToBlogFourButton',this.timeout)
+        .click('@navigateToBlogFourButton');
+    },
+
+    validateNavigationToPage3 : function (browser) {
+        this.waitForElementVisible('@navigateToBlogThreeButton',this.timeout)
+        .click('@navigateToBlogThreeButton');
+    },
+
     validatePage2 : function(browser){
+        this.waitForElementVisible('@navigateToBlogOneButton',this.timeout)
         this.waitForElementVisible('@navigateToBlogThreeButton',this.timeout)
     },
 
+    validatePage3 : function(browser){
+        this.waitForElementVisible('@navigateToBlogTwoButton',this.timeout)
+        this.waitForElementVisible('@navigateToBlogFourButton',this.timeout)
+    },
+
+    validatePage4 : function(browser){
+        this.waitForElementVisible('@navigateToBlogThreeButton',this.timeout)
+        this.waitForElementVisible('@navigateToBlogFiveButton',this.timeout)
+    },
+
     validatePage8 : function(browser){
+        this.waitForElementVisible('@navigateToBlogSevenButton',this.timeout)
         this.waitForElementVisible('@navigateToBlogNineButton',this.timeout)
+    },
+
+    validatePage11 : function(browser){
+        this.waitForElementVisible('@navigateToBlogTenButton',this.timeout)
     },
 
     validateErrorPage : function(browser) {
         this.waitForElementVisible('@errorLink',this.timeout);
+    },
+
+    validateNoNavForPage12 : function (browser){
+        var sel = pageElements.navigateToBlogTwelveButton.selector;
+        browser.assert.elementNotPresent(sel,"Not Present")
+    },
+
+    validatePostPage : function (browser,postPostFix) {
+        browser.useXpath()
+        this.getAttribute('@metaOGUrl','content',function(result){
+            console.log("OGUrl in meta ="+result.value)
+            chai.assert.include(result.value,postPostFix,"Incorrect post is opened.")
+        })
     }
 };
 

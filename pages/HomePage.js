@@ -142,8 +142,13 @@ var homePage = {
     },
 
     validateNavigationToPage2 : function (browser) {
-        this.waitForElementVisible('@navigateToBlogTwoButton',this.timeout)
-        .click('@navigateToBlogTwoButton');
+        browser.execute(function(){
+            document.querySelector(arguments[0]).scrollIntoView();
+        },["a[class='older-posts fa-chevron-right square fill-horizontal']"])
+        .pause(200)
+        .click("//a[@class='older-posts fa-chevron-right square fill-horizontal']")
+        // this.waitForElementVisible('@navigateToBlogTwoButton',this.timeout)
+        // .click('@navigateToBlogTwoButton');
     },
 
     validatePage2 : function(browser){

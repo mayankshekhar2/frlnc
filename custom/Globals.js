@@ -2,6 +2,7 @@ var log = require('../custom/log/logger.js');
 var logSummary = require('../custom/log/summary.js');
 var args = require('minimist')(process.argv);
 var allure = require("nightwatch-allure-adapter");
+var utils = require('../util/CommonUtil.js')
 
 var totalTestsPassed = 0;
 var totalTestsFailed = 0;
@@ -13,6 +14,7 @@ var p;
 var f;
 var browserUsed;
 var timestamp = String(new Date());
+var headlessTF = args['headlessTF'] // Mosts tests are configured to run headless by default, but while running tests individually, setting this true in args will make them not run headless.
 
 module.exports = {
     
@@ -23,8 +25,16 @@ module.exports = {
     shortTimeout: 3000,
 	mediumTimeout: 6000,
 	longTimeout: 9000,
+	
 
 	beforeEach : function (browser, cb) {
+		if(headlessTF == 'false'){
+			console.log(headlessTF)
+			utils.removeHeadlessBrowser(browser);
+		}
+		else {
+			utils.runHeadlessBrowser(browser);
+		}
 		log.logInfo('Test Started');
 		 browserUsed = browser.options.desiredCapabilities.browserName;
 		log.logInfo('Test running on browser :' + browserUsed);

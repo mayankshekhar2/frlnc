@@ -12,7 +12,7 @@ var pageElements = {
         },
 
         navigateToBlogTwoButton : {
-        	selector : ".//a[@href='/blog/page2/']",
+        	selector : ".//a[@href='/blog/page2/']/span",
             locateStrategy : 'xpath'
         },
 
@@ -58,6 +58,16 @@ var pageElements = {
 
         searchBox : {
         	selector : ".//input[@id='search-query']",
+            locateStrategy : 'xpath'
+        },
+
+        searchButton : {
+        	selector : ".//form[@action='/search/']/input[@type='submit']",
+            locateStrategy : 'xpath'
+        },
+
+        pageNumberText : {
+        	selector : ".//span[@class='page-number']",
             locateStrategy : 'xpath'
         }
 };
@@ -142,8 +152,17 @@ var homePage = {
     },
 
     validateNavigationToPage2 : function (browser) {
-        this.waitForElementVisible('@navigateToBlogTwoButton',this.timeout)
-        .click('@navigateToBlogTwoButton');
+        browser.useXpath()
+        .pause(2000)
+        var navButton = '.older-posts fa-chevron-right square fill-horizontal';
+        this.waitForElementVisible('@navigateToBlogTwoButton')
+        // browser.execute(function(navButton){
+        //     document.querySelector(navButton).click();
+        // })
+
+        browser.execute(function(selector) {
+            document.querySelector(selector).click()
+          },[navButton])
     },
 
     validatePage2 : function(browser){
@@ -152,6 +171,27 @@ var homePage = {
 
     validateErrorPage : function(browser) {
         this.waitForElementVisible('@errorLink',this.timeout);
+    },
+
+    searchThroughSearchBox : function(browser,searchString){
+        browser.useXpath()
+        .pause(2000)
+
+        this.waitForElementVisible('@searchBox',this.timeout)
+        .sendKeys('@searchBox',searchString)
+        .click('@searchButton')
+    },
+
+    goToLastBlogPage : function(browser){
+        browser.useXpath()
+        .pause(2000)
+        this.waitForElementVisible('@pageNumberText',this.timeout)
+        .getText('@pageNumberText',function(result){            
+            var pageNumber = result.value.toString().substring(10,12)
+            var url = browser.launch_url+"blog/page"+pageNumber+"/"
+            browser.url(url);
+            console.log("URL ="+url);
+        })
     }
 };
 

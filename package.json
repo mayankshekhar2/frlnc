@@ -13,6 +13,7 @@
     "chai": "^4.1.2",
     "chromedriver": "",
     "comment-parser": "",
+    "delete": "^1.1.0",
     "faker": "",
     "find": "",
     "json": "^9.0.6",
@@ -29,9 +30,11 @@
     "junit-viewer": "^4.11.1"
   },
   "scripts": {
-    "test": "nightwatch tests",
+    "test": "node util/DeleteReportFiles.js & nightwatch tests --headlessTF=false",
     "report": "junit-viewer --results=reports --save=reports/rep.html --minify=false && open reports/rep.html",
-    "allure": "allure generate --clean & start ./allure-report/index.html"
+    "allureReport": "allure generate --clean & open ./allure-report/index.html",
+    "report_win": "junit-viewer --results=reports --save=reports/rep.html --minify=false && start reports/rep.html",
+    "allureReport_win": "allure generate --clean & start ./allure-report/index.html"
   },
   "repository": {},
   "keywords": [],

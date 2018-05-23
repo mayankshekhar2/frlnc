@@ -35,6 +35,10 @@ module.exports = {
     removeHeadlessBrowser : function (browser){
         var a=browser.options.desiredCapabilities.chromeOptions;
         browser.options.desiredCapabilities.chromeOptions.args = ['disable-extensions']
-        console.log(a.args);
+    },
+
+    runHeadlessBrowser : function (browser){
+        var a=browser.options.desiredCapabilities.chromeOptions;
+        browser.options.desiredCapabilities.chromeOptions.args = ["disable-extensions","headless","disable-gpu","no-sandbox","allow-insecure-localhost"]
     }
 }

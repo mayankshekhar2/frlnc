@@ -116,6 +116,16 @@ var pageElements = {
             locateStrategy : 'xpath'
         },
 
+        navigateToNextPageButton : {
+        	selector : ".//a[@class='older-posts fa-chevron-right square fill-horizontal']",
+            locateStrategy : 'xpath'
+        },
+
+        navigateToPreviousPageButton : {
+        	selector : ".//a[@class='newer-posts fa-chevron-left square fill-horizontal']",
+            locateStrategy : 'xpath'
+        },
+
         navigateToBlogOnrButton : {
         	selector : ".//a[@href='/']",
             locateStrategy : 'xpath'
@@ -514,6 +524,11 @@ var blogPage = {
 
     validateNoNavForPage12 : function (browser){
         var sel = pageElements.navigateToBlogTwelveButton.selector;
+        browser.assert.elementNotPresent(sel,"Not Present")
+    },
+
+    validateNoNavToNextPage : function (browser){
+        var sel = pageElements.navigateToNextPageButton.selector;
         browser.assert.elementNotPresent(sel,"Not Present")
     },
 

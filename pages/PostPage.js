@@ -21,6 +21,36 @@ var pageElements = {
             locateStrategy : 'xpath'
         },
 
+        commentFrame : {
+        	selector : ".//iframe[@title='Disqus'][1]",
+            locateStrategy : 'xpath'
+        },
+
+        commentSection : {
+        	selector : ".//div[@id='disqus']",
+            locateStrategy : 'xpath'
+        },
+
+        commentCounter : {
+        	selector : ".//span[@class='comment-count']",
+            locateStrategy : 'xpath'
+        },
+
+        authorBox : {
+        	selector : ".//div[@class='author-box']",
+            locateStrategy : 'xpath'
+        },
+
+        authorTitle : {
+        	selector : ".//h2[@class='author-title']",
+            locateStrategy : 'xpath'
+        },
+
+        authorBio : {
+        	selector : ".//p[@class='author-bio']",
+            locateStrategy : 'xpath'
+        },
+
         headerFacebookCounter : {
             selector : ".//header/descendant::span[@class='counter c_facebook']",
             locateStrategy : 'xpath'
@@ -48,6 +78,21 @@ var pageElements = {
 
         footerPlusCounter : {
             selector : ".//footer/descendant::span[@class='counter c_plus']",
+            locateStrategy : 'xpath'
+        },
+
+        relatedPost1 : {
+            selector : "//div[@class='related'][1]/descendant::div/div/a",
+            locateStrategy : 'xpath'
+        },
+
+        relatedPost2 : {
+            selector : "//div[@class='related'][2]/descendant::div/div/a",
+            locateStrategy : 'xpath'
+        },
+
+        relatedPost3 : {
+            selector : "//div[@class='related'][3]/descendant::div/div/a",
             locateStrategy : 'xpath'
         }
 };
@@ -213,6 +258,57 @@ var postPage = {
             chai.assert.equal(UIHeadercount,UIFootercount,"Plus counts do not match between header and footer.")
         });
     },
+
+    validateCommentCounterPresent : function (browser) {
+        browser.useXpath()
+        .pause(2000);
+        this.waitForElementVisible('@commentSection',this.timeout)
+        .click('@commentSection')
+        var frameid;
+        
+        this.getAttribute('@commentFrame','id',function(result){
+            frameid = result.value;
+            this.frame(null)
+            console.log("Swith to Comments Frame")
+            .frame(frameid)
+        })
+        .waitForElementVisible('@commentCounter',this.timeout)
+        this.getText('@commentCounter', function(result){
+            console.log("Comments Counts = "+result.value.toString())
+        })
+        .frame(null)       
+    },
+
+    validateCommentSectionPresent : function(browser){
+        browser.useXpath()
+        .pause(2000);
+        this.waitForElementVisible('@commentSection',this.timeout)
+    },
+
+    validateAuthorInfoAvailable : function(browser){
+        browser.useXpath()
+        .pause(2000);
+        this.waitForElementVisible('@authorBox',this.timeout)
+        .waitForElementVisible('@authorTitle',this.timeout)
+        .waitForElementVisible('@authorBio',this.timeout)
+    },
+
+    validateRelatedPostsPresent : function(browser){
+        browser.useXpath()
+        .pause(2000);
+        this.waitForElementVisible('@relatedPost1',this.timeout)
+        .getText('@relatedPost1',function(result){
+            console.log("Related Article 1 ="+result.value)
+        })
+        .waitForElementVisible('@relatedPost2',this.timeout)
+        .getText('@relatedPost2',function(result){
+            console.log("Related Article 2 ="+result.value)
+        })
+        .waitForElementVisible('@relatedPost3',this.timeout)
+        .getText('@relatedPost3',function(result){
+            console.log("Related Article 3 ="+result.value)
+        })
+    }
 };
 
 module.exports = {

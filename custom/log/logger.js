@@ -7,7 +7,7 @@ var bunyan = require('bunyan');
 var logObj = bunyan.createLogger({
     name : 'VuJsTests',
     streams : [{
-        path : './reports/socialCounter.log'
+        path : './reports/VueJS_Tests.log'
         // `type: 'file'` is implied
     }]
 });

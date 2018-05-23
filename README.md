@@ -35,9 +35,12 @@ nightwatch tests\<testName>.js # specific test
 
 ##Reports
 
-* Reports will be in Junit XML format
+* Reports will be in Junit XML format and also Allure Report
 
 ```bash
-npm run report
+To see JUnit Report on Mac : npm run report
+To see Allure Report on Mac : npm run allureReport
+To see JUnit Report on Windows : npm run report_win
+To see Allure Report on Windows : npm run allureReport_win
 ```
 

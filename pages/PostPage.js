@@ -268,15 +268,15 @@ var postPage = {
         
         this.getAttribute('@commentFrame','id',function(result){
             frameid = result.value;
-            this.frame(null)
             console.log("Swith to Comments Frame")
+            this.frame(null)            
             .frame(frameid)
         })
         .waitForElementVisible('@commentCounter',this.timeout)
         this.getText('@commentCounter', function(result){
             console.log("Comments Counts = "+result.value.toString())
         })
-        .frame(null)       
+        // this.frame(null)       
     },
 
     validateCommentSectionPresent : function(browser){

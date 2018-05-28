@@ -29,6 +29,26 @@ var pageElements = {
         searchBox : {
         	selector : ".//input[@id='search-query']",
             locateStrategy : 'xpath'
+        },
+
+        searchResultBlocks : {
+        	selector : ".//div[@class='post-content']",
+            locateStrategy : 'xpath'
+        },
+
+        fbCounters : {
+        	selector : ".//span[@class='counter c_facebook']",
+            locateStrategy : 'xpath'
+        },
+
+        twitterCounters : {
+        	selector : ".//span[@class='counter c_twitter']",
+            locateStrategy : 'xpath'
+        },
+
+        plusCounters : {
+        	selector : ".//span[@class='counter c_plus']",
+            locateStrategy : 'xpath'
         }
 };
 var searchPage = {
@@ -76,6 +96,58 @@ var searchPage = {
 
     validateNoArticlesInSearchResults : function(browser){
         this.assert.elementNotPresent('@searchResultsArticles')
+    },
+
+    validateArticlesPresentInSearchResults : function(browser){
+        this.assert.elementPresent("@searchResultsArticles");
+    },
+
+    ValidateFacebookCounterIsPresentOnEachResult : function(browser){
+        var numOfResults;
+        var numOfFbCounters;
+        this.waitForElementVisible('@searchResultBlocks',this.timeout);
+        browser.elements('xpath',"//div[@class='post-content']",function(result){
+            numOfResults = Object.keys(result.value).length;
+            console.log("Number Of Search Results ="+numOfResults);
+        });
+
+        browser.elements('xpath',"//span[@class='counter c_facebook']",function(result){
+            numOfFbCounters = Object.keys(result.value).length;
+            console.log("Number Of Facebook Counters ="+numOfFbCounters);
+            chai.assert.equal(numOfFbCounters,numOfResults,"Facebook counter is not present for each search result.");   
+        });
+    },
+
+    ValidateTwitterCounterIsPresentOnEachResult : function(browser){
+        var numOfResults;
+        var numOftwitterCounters;
+        this.waitForElementVisible('@searchResultBlocks',this.timeout);
+        browser.elements('xpath',"//div[@class='post-content']",function(result){
+            numOfResults = Object.keys(result.value).length;
+            console.log("Number Of Search Results ="+numOfResults);
+        });
+
+        browser.elements('xpath',"//span[@class='counter c_twitter']",function(result){
+            numOftwitterCounters = Object.keys(result.value).length;
+            console.log("Number Of Twitter Counters ="+numOftwitterCounters);
+            chai.assert.equal(numOftwitterCounters,numOfResults,"Twitter counter is not present for each search result.");   
+        });
+    },
+
+    ValidatePlusCounterIsPresentOnEachResult : function(browser){
+        var numOfResults;
+        var numOfPlusCounters;
+        this.waitForElementVisible('@searchResultBlocks',this.timeout);
+        browser.elements('xpath',"//div[@class='post-content']",function(result){
+            numOfResults = Object.keys(result.value).length;
+            console.log("Number Of Search Results ="+numOfResults);
+        });
+
+        browser.elements('xpath',"//span[@class='counter c_plus']",function(result){
+            numOfPlusCounters = Object.keys(result.value).length;
+            console.log("Number Of Google Plus Counters ="+numOfPlusCounters);
+            chai.assert.equal(numOfPlusCounters,numOfResults,"Google Plus counter is not present for each search result.");   
+        });
     }
 };
 

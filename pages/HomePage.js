@@ -102,7 +102,6 @@ var homePage = {
 
         this.waitForElementVisible('@aricleArray',this.timeout);
         browser.elements('xpath',"//article[@class='post']",function(result){
-            console.log(result.value);
             var length = Object.keys(result.value).length;
             console.log("Number Of Articles ="+length);
             chai.assert.equal(length,5,"Number Of Articles is not 5.");   
@@ -152,27 +151,11 @@ var homePage = {
     },
 
     validateNavigationToPage2 : function (browser) {
-<<<<<<< HEAD
-        browser.useXpath()
-        .pause(2000)
-        var navButton = '.older-posts fa-chevron-right square fill-horizontal';
-        this.waitForElementVisible('@navigateToBlogTwoButton')
-        // browser.execute(function(navButton){
-        //     document.querySelector(navButton).click();
-        // })
-
-        browser.execute(function(selector) {
-            document.querySelector(selector).click()
-          },[navButton])
-=======
         browser.execute(function(){
             document.querySelector(arguments[0]).scrollIntoView();
         },["a[class='older-posts fa-chevron-right square fill-horizontal']"])
         .pause(200)
         .click("//a[@class='older-posts fa-chevron-right square fill-horizontal']")
-        // this.waitForElementVisible('@navigateToBlogTwoButton',this.timeout)
-        // .click('@navigateToBlogTwoButton');
->>>>>>> 757fd473a42a1dcd51e134c96b850d18494e9127
     },
 
     validatePage2 : function(browser){
@@ -201,6 +184,38 @@ var homePage = {
             var url = browser.launch_url+"blog/page"+pageNumber+"/"
             browser.url(url);
             console.log("URL ="+url);
+        })
+    },
+
+    getLastPageNumber : function(browser){
+        browser.useXpath()
+        .pause(2000)
+        this.waitForElementVisible('@pageNumberText',this.timeout)
+
+        .getText('@pageNumberText',function(result){            
+            var pageNumber = result.value.toString().substring(10,12);
+            console.log("Total Number Of pages = "+pageNumber);
+        })
+    },
+
+    checkFiveArticlesOnEachPage : function(browser,blogPage) {
+        browser.useXpath()
+        .pause(2000)
+        this.waitForElementVisible('@pageNumberText',this.timeout)
+
+        .getText('@pageNumberText',function(result){            
+            var lastPageNumber = result.value.toString().substring(10,12);
+            var i=0;
+            for(i=2; i<=lastPageNumber;i++){
+                var url = browser.launch_url+"blog/page"+i+"/"
+                browser.url(url)
+                if(i < lastPageNumber)
+                    blogPage.validateFiveArticlesOnEachPage(browser,url);
+                else if( i == lastPageNumber)
+                    blogPage.validateNumOfArticlesOnLastPage(browser,url);
+            }
+    
+            
         })
     }
 };

@@ -430,10 +430,41 @@ var blogPage = {
 
         this.waitForElementVisible('@aricleArray',this.timeout);
         browser.elements('xpath',"//article[@class='post']",function(result){
-            console.log(result.value);
+            // console.log(result.value);
             var length = Object.keys(result.value).length;
             console.log("Number Of Articles ="+length);
             chai.assert.equal(length,5,"Number Of Articles is not 5.");   
+        });
+    },
+
+    validateFiveArticlesOnEachPage : function (browser,url) {
+        
+        browser.useXpath()
+        .pause(2000)
+
+        this.waitForElementVisible('@aricleArray',this.timeout);
+        browser.elements('xpath',"//article[@class='post']",function(result){
+            // console.log(result.value);
+            console.log("Current URL : "+url);
+            var length = Object.keys(result.value).length;
+            console.log("Number Of Articles ="+length);
+            chai.assert.equal(length,5,"Number Of Articles is not 5.");   
+        });
+    },
+
+    validateNumOfArticlesOnLastPage : function (browser,url) {
+        
+        browser.useXpath()
+        .pause(2000)
+
+        this.waitForElementVisible('@aricleArray',this.timeout);
+        browser.elements('xpath',"//article[@class='post']",function(result){
+            // console.log(result.value);
+            console.log("Current URL : "+url);
+            var length = Object.keys(result.value).length;
+            console.log("Number Of Articles ="+length);
+            chai.assert.isAtMost(length,5,"Number Of Articles more than 5.");   
+            chai.assert.isAtLeast(length,1,"Number Of Articles less than 1.");
         });
     },
 

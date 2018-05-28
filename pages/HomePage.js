@@ -152,6 +152,7 @@ var homePage = {
     },
 
     validateNavigationToPage2 : function (browser) {
+<<<<<<< HEAD
         browser.useXpath()
         .pause(2000)
         var navButton = '.older-posts fa-chevron-right square fill-horizontal';
@@ -163,6 +164,15 @@ var homePage = {
         browser.execute(function(selector) {
             document.querySelector(selector).click()
           },[navButton])
+=======
+        browser.execute(function(){
+            document.querySelector(arguments[0]).scrollIntoView();
+        },["a[class='older-posts fa-chevron-right square fill-horizontal']"])
+        .pause(200)
+        .click("//a[@class='older-posts fa-chevron-right square fill-horizontal']")
+        // this.waitForElementVisible('@navigateToBlogTwoButton',this.timeout)
+        // .click('@navigateToBlogTwoButton');
+>>>>>>> 757fd473a42a1dcd51e134c96b850d18494e9127
     },
 
     validatePage2 : function(browser){
